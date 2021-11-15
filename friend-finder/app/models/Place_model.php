@@ -19,11 +19,10 @@ class Place_model
         $place_close_time = htmlspecialchars($data['place_close_time']);
         $place_picture = htmlspecialchars($data['place_picture']);
         $created_at = htmlspecialchars($data['created_at']);
-        $status = htmlspecialchars($data['status']);
         $category_id = htmlspecialchars($data['category_id']);
         $contact_person = htmlspecialchars($data['contact_person']);
 
-        $this->db->query('INSERT INTO place VALUES("", :place_name, :place_owner, :price, :location, :description, :created_at, :place_picture, :place_open_time, :place_close_time, :status, :contact_person)');
+        $this->db->query("INSERT INTO place VALUES ('', :place_name, :place_owner, :price, :location, :description, :created_at, :place_picture, :place_open_time, :place_close_time, :status, :category_id, :contact_person)");
 
         $this->db->bindValue('place_name', $place_name);
         $this->db->bindValue('place_owner', $place_owner);
@@ -34,11 +33,11 @@ class Place_model
         $this->db->bindValue('place_picture', $place_picture);
         $this->db->bindValue('place_open_time', $place_open_time);
         $this->db->bindValue('place_close_time', $place_close_time);
-        $this->db->bindValue('status', $status);
+        $this->db->bindValue('status', 'available');
         $this->db->bindValue('category_id', $category_id);
         $this->db->bindValue('contact_person', $contact_person);
-
         $this->db->execute();
+
         return $this->db->rowCount();
     }
 

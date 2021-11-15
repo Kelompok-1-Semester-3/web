@@ -86,11 +86,16 @@
                         </div>
                         <div class="row mt-4">
                             <div class="col-md-12">
-                                <span class="color-danger fw-semibold">
-                                    <?php foreach ($data['categories'] as $category) : ?>
-                                        <?= ($category['id'] == $place['category_id']) ? $category['name'] : '' ?>
-                                    <?php endforeach; ?>
-                                </span>
+                                <div class="row">
+                                    <div class="d-flex">
+                                        <span class="color-danger fw-semibold me-2">
+                                            <?php foreach ($data['categories'] as $category) : ?>
+                                                <?= ($category['id'] == $place['category_id']) ? $category['name'] : '' ?>
+                                            <?php endforeach; ?>
+                                        </span>
+                                        <span class="badge d-flex align-items-center <?= ($place['status'] == 'available') ? 'bg-primary' : 'bg-danger' ?> rounded-pill"><?= $place['status'] ?></span>
+                                    </div>
+                                </div>
                                 <h4 class="mt-1"><strong><?= $place['place_name'] ?></strong></h4>
                                 <span class="color-secondary mt-0 py-0"><?= $data['account']['fullname'] ?></span>
                                 <ul class="list-unstyled mt-3">
@@ -114,7 +119,7 @@
                         </div>
                         <div class="row mt-3">
                             <div class="col d-flex justify-content-between">
-                                <a href="<?= BASE_URL ?>/place/detail/<?= $place['id'] ?>" class="btn btn-primary btn-shadow">JOIN</a>
+                                <a href="<?= BASE_URL ?>/place/detail/<?= $place['id'] ?>" class="btn btn-primary btn-shadow">DETAIL</a>
                                 <div class="d-flex">
                                     <a href="<?= BASE_URL ?>/place/edit/<?= $place['id'] ?>" class="me-2 btn btn-warning btn-shadow"><i class="fas fa-edit"></i></a>
                                     <button type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#modalDeleteplace">
@@ -142,35 +147,35 @@
                 <form action="<?= BASE_URL ?>/place/store" method="POST" enctype="multipart/form-data">
                     <div class="mb-3">
                         <label for="place_name" class="form-label">Place Name</label>
-                        <input type="text" class="form-control" required name="place_name" id="place_name">
+                        <input type="text" class="form-control" name="place_name" id="place_name">
                     </div>
                     <div class="mb-3">
                         <label for="place_owner" class="form-label">Owner</label>
-                        <input type="text" class="form-control" required name="place_owner" id="place_owner">
+                        <input type="text" class="form-control" name="place_owner" id="place_owner">
                     </div>
                     <div class="mb-3">
                         <label for="price" class="form-label">Price</label>
-                        <input type="number" class="form-control" required name="price" id="price">
+                        <input type="number" class="form-control" name="price" id="price">
                     </div>
                     <div class="mb-3">
                         <label for="location" class="form-label">Location</label>
-                        <input type="text" class="form-control" required name="location" id="location">
+                        <input type="text" class="form-control" name="location" id="location">
                     </div>
                     <div class="mb-3">
                         <label for="description" class="form-label">Description</label>
-                        <input type="text" class="form-control" required name="description" id="description">
+                        <input type="text" class="form-control" name="description" id="description">
                     </div>
                     <div class="mb-3">
                         <label for="place_picture" class="form-label">Picture</label>
-                        <input type="file" class="form-control" required name="place_picture" id="place_picture">
+                        <input type="file" class="form-control" name="place_picture" id="place_picture">
                     </div>
                     <div class="mb-3">
                         <label for="place_open_time" class="form-label">Time Open</label>
-                        <input type="time" class="form-control" required name="place_open_time" id="place_open_time">
+                        <input type="time" class="form-control" name="place_open_time" id="place_open_time">
                     </div>
                     <div class="mb-3">
                         <label for="place_close_time" class="form-label">Time Close</label>
-                        <input type="time" class="form-control" required name="place_close_time" id="place_close_time">
+                        <input type="time" class="form-control" name="place_close_time" id="place_close_time">
                     </div>
                     <div class="mb-3">
                         <label for="category_id" class="form-label">Category</label>
@@ -182,7 +187,7 @@
                     </div>
                     <div class="mb-3">
                         <label for="contact_person" class="form-label">Contact Person</label>
-                        <input type="text" class="form-control" required name="contact_person" id="contact_person">
+                        <input type="text" class="form-control" name="contact_person" id="contact_person">
                     </div>
             </div>
             <div class="modal-footer">

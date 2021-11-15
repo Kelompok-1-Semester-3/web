@@ -62,10 +62,11 @@ class Place extends Controller
 
     public function store()
     {
+        $_POST['price'] = (int) $_POST['price'];
+        $_POST['category_id'] = (int) $_POST['category_id'];
         $place_picture = $this->upload($_FILES['place_picture']);
         $_POST['place_picture'] = $place_picture;
         $_POST['created_at'] = date("Y-m-d");
-        $_POST['status'] = "available";
         // echo json_encode($_POST);
         // die();
         if ($this->model('Place_model')->addNewPlace($_POST)) {
@@ -147,5 +148,10 @@ class Place extends Controller
                 </script>
             ';
         }
+    }
+
+    public function getDetailPlace()
+    {
+        echo json_encode($this->model('Place_model')->getPlaceByID($_POST['id']));
     }
 }

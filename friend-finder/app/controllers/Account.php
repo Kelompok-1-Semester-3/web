@@ -88,4 +88,17 @@ class Account extends Controller
         move_uploaded_file($tmp_name, "../public/img/$newName");
         return $newName;
     }
+
+    public function account_po()
+    {
+        $data['title'] = 'Account';
+        $credential = $_SESSION['account'];
+
+        $data['account'] = $this->model('Account_model')->getAccountByID($credential['id']);
+
+        $this->view('po_dashboard/templates/header', $data);
+        $this->view('po_dashboard/templates/sidebar');
+        $this->view('account/index', $data);
+        $this->view('po_dashboard/templates/footer');
+    }
 }

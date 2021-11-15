@@ -12,6 +12,17 @@
     }
 </script>
 <script src="<?= BASE_URL ?>/js/jquery.js"></script>
+<script src="<?= BASE_URL ?>/js/datatables.min.js"></script>
+<script>
+    $(document).ready(function() {
+        $('#table_transaction').DataTable();
+    });
+
+    var tooltipTriggerList = [].slice.call(document.querySelectorAll('[data-bs-toggle="tooltip"]'))
+    var tooltipList = tooltipTriggerList.map(function(tooltipTriggerEl) {
+        return new bootstrap.Tooltip(tooltipTriggerEl)
+    });
+</script>
 <script src="<?= BASE_URL ?>/js/kodeku.js"></script>
 </body>
 

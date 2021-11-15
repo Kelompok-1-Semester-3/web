@@ -32,7 +32,7 @@ if ($_SESSION['account']['role_id'] != 1) {
                         </a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link <?= (App::$page == 'transaction') ? 'active text-white' : '' ?>" href="<?= BASE_URL ?>/place">
+                        <a class="nav-link <?= (App::$page == 'transaction') ? 'active text-white' : '' ?>" href="<?= BASE_URL ?>/transaction">
                             <div class="d-flex align-items-center">
                                 <span data-feather="git-pull-request" class="me-2"></span>
                                 Transaction
@@ -40,7 +40,7 @@ if ($_SESSION['account']['role_id'] != 1) {
                         </a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link <?= (App::$page == 'account') ? 'active text-white' : '' ?>" href="<?= BASE_URL ?>/place">
+                        <a class="nav-link <?= (App::$page == 'account') ? 'active text-white' : '' ?>" href="<?= BASE_URL ?>/account/account_po">
                             <div class="d-flex align-items-center">
                                 <span data-feather="user" class="me-2"></span>
                                 Account

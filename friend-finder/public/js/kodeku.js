@@ -7,15 +7,17 @@ $(document).ready(function () {
         $.ajax({
             type: "post",
             url: "http://localhost/friend-finder/public/event/getEventByCategory",
-            data: {category_id:category_id},
+            data: {
+                category_id: category_id
+            },
             dataType: "json",
             success: function (result) {
                 // console.log(result);
                 let content = '';
-                if(result.length == 0) {
+                if (result.length == 0) {
                     $('.row-event').append('<div class="col-md-12"><h3 class="text-center">No Event Here!</h3></div>');
                 } else {
-                    $.each(result, function (indexInArray, data) {  
+                    $.each(result, function (indexInArray, data) {
                         content += `<div class="col-md-6 col-lg-4"><div class="card-box"><div class="card-thumbnail"><img src="http://localhost/friend-finder/public/img/${data.event_picture}" class="img-fluid" alt=""></div><div class="row mt-4"><div class="col-md-12"><span class="color-danger fw-semibold">${data.name}</span><h4 class="mt-1"><strong>${data.name_event}</strong></h4><span class="color-secondary mt-0 py-0">${data.event_owner}</span><ul class="list-unstyled mt-3"><li><div class="d-flex align-items-center"><i class="me-2 color-primary fas fa-tag"></i>IDR ${data.price}</div></li><li><div class="d-flex align-items-center"><i class="me-2 color-primary fas fa-map"></i>${data.location}</div></li><li><div class="d-flex align-items-center"><i class="me-2 color-primary fas fa-calendar"></i>${data.event_start_date}</div></li></ul></div></div><div class="row mt-3"><div class="col"><a href="<?= BASE_URL ?>/event/detail/<?= $event['id'] ?>" class="btn btn-primary btn-shadow">JOIN</a></div></div></div></div>`;
 
                         $('.row-event').html(content);
@@ -24,26 +26,88 @@ $(document).ready(function () {
             }
         });
     });
-        
 
-    $('.search-event').on('keyup', function(e) {
-        if(e.keyCode == 13) {
+
+    $('.search-event').on('keyup', function (e) {
+        if (e.keyCode == 13) {
             $('.row-event').html('');
             keyword = $('.search-event').val();
-            if(keyword.length == 0) {
+            if (keyword.length == 0) {
                 document.location.href = "http://localhost/friend-finder/public/event";
             } else {
                 $.ajax({
-                type: "post",
-                url: "http://localhost/friend-finder/public/event/getEvenyByKeyword",
-                data: {keyword:keyword},
-                dataType: "json",
-                success: function (result) {
-                    let event = result[0];
-                    $('.row-event').html(`<div class="col-md-6 col-lg-4"><div class="card-box"><div class="card-thumbnail"><img src="http://localhost/friend-finder/public/img/${event.event_picture}" class="img-fluid" alt=""></div><div class="row mt-4"><div class="col-md-12"><span class="color-danger fw-semibold">${event.name}</span><h4 class="mt-1"><strong>${event.name_event}</strong></h4><span class="color-secondary mt-0 py-0">${event.event_owner}</span><ul class="list-unstyled mt-3"><li><div class="d-flex align-items-center"><span data-feather="tag" class="me-2 color-primary"></span>IDR ${event.price}</div></li><li><div class="d-flex align-items-center"><span data-feather="map-pin" class="me-2 color-primary"></span>${event.location}</div></li><li><div class="d-flex align-items-center"<span data-feather="calendar" class="me-2 color-primary"></span>${event.event_start_date}</div></li></ul></div></div><div class="row mt-3"><div class="col"><a href="<?= BASE_URL ?>/event/detail/<?= $event['id'] ?>" class="btn btn-primary btn-shadow">JOIN</a></div></div></div></div>`);
-                }
-            });
+                    type: "post",
+                    url: "http://localhost/friend-finder/public/event/getEvenyByKeyword",
+                    data: {
+                        keyword: keyword
+                    },
+                    dataType: "json",
+                    success: function (result) {
+                        let event = result[0];
+                        $('.row-event').html(`<div class="col-md-6 col-lg-4"><div class="card-box"><div class="card-thumbnail"><img src="http://localhost/friend-finder/public/img/${event.event_picture}" class="img-fluid" alt=""></div><div class="row mt-4"><div class="col-md-12"><span class="color-danger fw-semibold">${event.name}</span><h4 class="mt-1"><strong>${event.name_event}</strong></h4><span class="color-secondary mt-0 py-0">${event.event_owner}</span><ul class="list-unstyled mt-3"><li><div class="d-flex align-items-center"><span data-feather="tag" class="me-2 color-primary"></span>IDR ${event.price}</div></li><li><div class="d-flex align-items-center"><span data-feather="map-pin" class="me-2 color-primary"></span>${event.location}</div></li><li><div class="d-flex align-items-center"<span data-feather="calendar" class="me-2 color-primary"></span>${event.event_start_date}</div></li></ul></div></div><div class="row mt-3"><div class="col"><a href="<?= BASE_URL ?>/event/detail/<?= $event['id'] ?>" class="btn btn-primary btn-shadow">JOIN</a></div></div></div></div>`);
+                    }
+                });
             }
         }
+    });
+
+    $('.buttonEditTransaction').on('click', function () {
+        // clear all field
+        $('#customer_name').val('');
+        $('#place_id').val('');
+        $('#contact_person').val('');
+        $('#start_date').val('');
+        $('#end_date').val('');
+        $('#price').val('');
+        $('#play_time').val('');
+        $('#total').val('');
+        $('#id').val('');
+        
+        let id = $(this).data('id');
+        // console.log(time_estimates_helper.length);
+        $.ajax({
+            type: "post",
+            url: "http://localhost/friend-finder/public/transaction/getSingleTransaction",
+            data: {
+                id: id
+            },
+            dataType: "json",
+            success: function (response) {
+                $('#customer_name').val(response.customer_name);
+                $('#place_id').val(response.place_id);
+                $('#contact_person').val(response.contact_person);
+                $('#start_date').val(response.start_date);
+                $('#end_date').val(response.end_date);
+                $(`#time_estimates option[value='${response.time_estimates}']`).attr("selected", "selected");
+                $('#price').val(response.price);
+                $('#play_time').val(response.play_time);
+                $('#total').val(response.total);
+                $('#id').val(response.id);
+                // $('span#total').html(response.total);
+            }
+        });
+    });
+
+    $('.addNewTransactionButton').on('click', function () {
+        let id = $(this).data('id');
+        $.ajax({
+            type: "post",
+            url: "http://localhost/friend-finder/public/place/getDetailPlace",
+            data: {
+                id: id
+            },
+            dataType: "json",
+            success: function (data) {
+                console.log(data);
+                $('#price').val(data.price);
+            }
+        });
+    });
+
+    $('#time_estimates').change(function (e) {
+        let time = $(this).children('option:selected').val();
+        let price = time * $('#price').val();
+        $('span#total').html(price);
+        $('input#total').val(price);
     });
 });
