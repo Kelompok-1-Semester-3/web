@@ -25,7 +25,15 @@
                             <td><?= $transaction['customer_name'] ?></td>
                             <td><?= $transaction['contact_person'] ?></td>
                             <td><?= $transaction['book_date'] ?></td>
-                            <td class="fw-bold"><?= ($transaction['time_estimates'] > 5) ? $transaction['time_estimates'] . 'D' : $transaction['time_estimates'] . ' H' ?></td>
+                            <td>
+                                <?php
+                                $open = explode(':', $transaction['start']);
+                                $open = $open[0] . ':' . $open[1];
+                                $close = explode(':', $transaction['end']);
+                                $close = $close[0] . ':' . $close[1];
+                                echo $open . ' - ' . $close;
+                                ?>
+                            </td>
                             <td>
                                 <div class="d-flex">
                                     <button class="me-2 btn btn-warning btn-shadow btn-sm buttonEditTransaction" data-id="<?= $transaction['id'] ?>" data-bs-toggle="modal" data-bs-target="#modalEditTransaction"><i class="fas fa-edit"></i></button>
@@ -46,64 +54,6 @@
         </div>
     </div>
 </main>
-
-<!-- Modal -->
-<!-- <div class="modal fade" id="addNewTransaction" tabindex="-1" aria-labelledby="addNewTransactionLabel" aria-hidden="true">
-    <div class="modal-dialog modal-dialog-centered">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title" id="addNewTransactionLabel">Add New Transaction</h5>
-                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-            </div>
-            <div class="modal-body">
-                <form action="<?= BASE_URL ?>/transaction/insert" method="POST">
-                    <div class="mb-3">
-                        <label for="customer_name" class="form-label">Customer Name</label>
-                        <input type="text" name="customer_name" id="customer_name" class="form-control">
-                    </div>
-                    <div class="mb-3">
-                        <label for="contact_person" class="form-label">Contact Person</label>
-                        <input type="text" name="contact_person" id="contact_person" class="form-control">
-                    </div>
-                    <div class="mb-3">
-                        <label for="start_date" class="form-label">Start Date</label>
-                        <input type="date" name="start_date" id="start_date" class="form-control">
-                    </div>
-                    <div class="mb-3">
-                        <label for="end_date" class="form-label">End Date</label>
-                        <input type="date" name="end_date" id="end_date" class="form-control">
-                    </div>
-                    <div class="mb-3">
-                        <label for="time_estimates" class="form-label">Time Estimates</label>
-                        <select name="time_estimater" id="time_estimates" class="form-select">
-                            <option value="1">1 Hour</option>
-                            <option value="2">2 Hour</option>
-                            <option value="3">3 Hour</option>
-                            <option value="4">4 Hour</option>
-                            <option value="5">5 Hour</option>
-                            <option value="24">1 Day</option>
-                        </select>
-                    </div>
-                    <div class="mb-3">
-                        <label for="price" class="form-label">Price</label>
-                        <input type="number" name="price" id="price" class="form-control">
-                    </div>
-                    <div class="mb-3">
-                        <label for="play_time" class="form-label">Play Time</label>
-                        <input type="time" name="play_time" id="play_time" class="form-control">
-                    </div>
-                    <div class="mb-3">
-                        <h4>-</h4>
-                    </div>
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                <button type="submit" class="btn btn-primary">Submit</button>
-                </form>
-            </div>
-        </div>
-    </div>
-</div> -->
 
 <!-- Modal For delete transaction -->
 <!-- Modal -->
@@ -136,8 +86,8 @@
             <div class="modal-body">
                 <form action="<?= BASE_URL ?>/transaction/edit" method="POST">
                     <div class="mb-3">
-                        <input type="hidden" name="place_id" value="" id="place_id">
-                        <input type="hidden" name="id" value="" id="id">
+                        <input type="hidden" name="id" id="id" value="">
+                        <input type="hidden" name="place_id" id="place_id" value="">
                         <label for="customer_name" class="form-label">Customer Name</label>
                         <input type="text" name="customer_name" id="customer_name" class="form-control">
                     </div>
@@ -146,34 +96,23 @@
                         <input type="text" name="contact_person" id="contact_person" class="form-control">
                     </div>
                     <div class="mb-3">
-                        <label for="start_date" class="form-label">Start Date</label>
-                        <input type="date" name="start_date" id="start_date" class="form-control">
+                        <label for="start" class="form-label">Start Time</label>
+                        <input type="time" name="start" id="start" class="form-control">
+                        <small class="text-muted">
+                            Start from
+                            <span id="start_time"></span>
+                        </small>
                     </div>
                     <div class="mb-3">
-                        <label for="end_date" class="form-label">End Date</label>
-                        <input type="date" name="end_date" id="end_date" class="form-control">
+                        <label for="end" class="form-label">End Time</label>
+                        <input type="time" name="end" id="end" class="form-control">
+                        <small class="text-muted">
+                            End in
+                            <span id="end_time"></span>
+                        </small>
                     </div>
                     <div class="mb-3">
-                        <label for="time_estimates" class="form-label">Time Estimates</label>
-                        <select name="time_estimates" id="time_estimates" class="form-select">
-                            <option value="1">1 Hour</option>
-                            <option value="2">2 Hour</option>
-                            <option value="3">3 Hour</option>
-                            <option value="4">4 Hour</option>
-                            <option value="5">5 Hour</option>
-                            <option value="24">1 Day</option>
-                        </select>
-                    </div>
-                    <div class="mb-3">
-                        <label for="price" class="form-label">Price</label>
-                        <input type="number" name="price" id="price" readonly class="form-control">
-                    </div>
-                    <div class="mb-3">
-                        <label for="play_time" class="form-label">Play Time</label>
-                        <input type="time" name="play_time" id="play_time" class="form-control">
-                    </div>
-                    <div class="mb-3">
-                        <input type="hidden" name="total" id="total">
+                        <input type="hidden" name="total" value="" id="total">
                         <h4 class="color-primary fw-semibold">IDR <span id="total">-</span></h4>
                     </div>
             </div>

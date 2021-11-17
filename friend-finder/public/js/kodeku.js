@@ -51,6 +51,10 @@ $(document).ready(function () {
         }
     });
 
+    $('#btn_print').on('click', function () {
+        $('#invoice_card').print();
+    });
+
     $('.buttonEditTransaction').on('click', function () {
         // clear all field
         $('#customer_name').val('');
@@ -62,7 +66,7 @@ $(document).ready(function () {
         $('#play_time').val('');
         $('#total').val('');
         $('#id').val('');
-        
+
         let id = $(this).data('id');
         // console.log(time_estimates_helper.length);
         $.ajax({
@@ -73,17 +77,38 @@ $(document).ready(function () {
             },
             dataType: "json",
             success: function (response) {
+                console.log(response.place_id);
                 $('#customer_name').val(response.customer_name);
                 $('#place_id').val(response.place_id);
                 $('#contact_person').val(response.contact_person);
-                $('#start_date').val(response.start_date);
-                $('#end_date').val(response.end_date);
-                $(`#time_estimates option[value='${response.time_estimates}']`).attr("selected", "selected");
-                $('#price').val(response.price);
-                $('#play_time').val(response.play_time);
+                let start = response.start.slice(0, 5);
+                let end = response.end.slice(0, 5);
+                $('#start').val(start);
+                $('#end').val(end);
+                $('#start_time').html(start);
+                $('#end_time').html(end);
                 $('#total').val(response.total);
                 $('#id').val(response.id);
-                // $('span#total').html(response.total);
+
+                // event
+                let starttime, endtime, price;
+                price = response.price;
+                $('#start').keyup(function (e) {
+                    let val = $(this).val();
+                    if (val.length > 0) {
+                        starttime = val.slice(0, 2);
+                    }
+                });
+
+                $('#end').keyup(function (e) {
+                    let val = $(this).val();
+                    if (val.length > 0) {
+                        endtime = val.slice(0, 2);
+                        let res = parseInt(endtime) - parseInt(starttime);
+                        $('span#total').html(`${res * price}`);
+                        $('input#total').val(`${res * price}`);
+                    }
+                });
             }
         });
     });
@@ -99,15 +124,28 @@ $(document).ready(function () {
             dataType: "json",
             success: function (data) {
                 console.log(data);
-                $('#price').val(data.price);
+                let price = data.price;
+                console.log(price);
+
+                // init start & end
+                let start, end;
+                $('#start').keyup(function (e) {
+                    let val = $(this).val();
+                    if (val.length > 0) {
+                        start = val.slice(0, 2);
+                    }
+                });
+
+                $('#end').keyup(function (e) {
+                    let val = $(this).val();
+                    if (val.length > 0) {
+                        end = val.slice(0, 2);
+                        let res = parseInt(end) - parseInt(start);
+                        $('span#total').html(`${res * price}`);
+                        $('input#total').val(`${res * price}`);
+                    }
+                });
             }
         });
-    });
-
-    $('#time_estimates').change(function (e) {
-        let time = $(this).children('option:selected').val();
-        let price = time * $('#price').val();
-        $('span#total').html(price);
-        $('input#total').val(price);
     });
 });

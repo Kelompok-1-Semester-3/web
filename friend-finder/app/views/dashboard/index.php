@@ -15,7 +15,7 @@
                             </div>
                         </div>
                     </div>
-                    <h3 class="color-primary mt-3">12</h3>
+                    <h3 class="color-primary mt-3"><?= $data['total_event']['total'] ?></h3>
                     <div class="row">
                         <div class="d-flex justify-content-between">
                             <span class="card-title-footer">Total Event</span>
@@ -35,7 +35,7 @@
                             </div>
                         </div>
                     </div>
-                    <h3 class="color-warning mt-3">10</h3>
+                    <h3 class="color-warning mt-3"><?= $data['self_event']['total'] ?></h3>
                     <div class="row">
                         <div class="d-flex justify-content-between">
                             <span class="card-title-footer">Your Event</span>

@@ -19,7 +19,6 @@ class Transaction extends Controller
     public function insert()
     {
         $_POST['book_date'] = date('Y-m-d');
-        $_POST['total'] = $_POST['price'] * $_POST['time_estimates'];
         // echo json_encode($_POST);
         // die();
         if ($this->model('Transaction_model')->addNewTransaction($_POST)) {
@@ -61,6 +60,8 @@ class Transaction extends Controller
 
     public function edit()
     {
+        // echo json_encode($_POST);
+        // die();
         if ($this->model('Transaction_model')->update($_POST)) {
             Flasher::setFlash('Success', 'Delete Transaction Successfully', 'success');
             echo "

@@ -48,7 +48,7 @@ if ($_SESSION['account']['role_id'] != 1) {
                         </a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="<?= BASE_URL ?>/auth/logout">
+                        <a type="button" class="nav-link" data-bs-toggle="modal" data-bs-target="#logoutModal">
                             <div class="d-flex align-items-center">
                                 <span data-feather="chevron-right" class="me-2"></span>
                                 Sign out
@@ -58,3 +58,23 @@ if ($_SESSION['account']['role_id'] != 1) {
                 </ul>
             </div>
         </nav>
+
+
+        <!-- Modal -->
+        <div class="modal fade" id="logoutModal" tabindex="-1" aria-labelledby="logoutModalLabel" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="logoutModalLabel">Attention!</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                        Are you sure to logout?
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">No</button>
+                        <a href="<?= BASE_URL ?>/auth/logout" class="btn btn-primary">Yes</a>
+                    </div>
+                </div>
+            </div>
+        </div>

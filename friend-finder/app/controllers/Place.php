@@ -3,6 +3,26 @@
 class Place extends Controller
 {
 
+    public function index()
+    {
+        $data['title'] = 'Place';
+        $credential = $_SESSION['account'];
+        $data['account'] = $this->model('Account_model')->getAccountBYID($credential['id']);
+        $data['place'] = $this->model('Place_model')->getAllPlace();
+
+        // echo json_encode($data['place']);
+        // die();
+
+        // view
+        $this->view('templates/header', $data);
+        $this->view('templates/sidebar');
+        $this->view('place/index', $data);
+        $this->view('templates/footer');
+
+        // echo json_encode($data['account']);
+        // die();
+    }
+
     public function detail($id)
     {
         $data['title'] = 'Place Owner';
@@ -10,11 +30,49 @@ class Place extends Controller
         $data['account'] = $this->model('Account_model')->getAccountByID($credential['id']);
         $data['place'] = $this->model('Place_model')->getPlaceByID($id);
         $data['categories'] = $this->model('Category_model')->getAllCategory();
+        $data['transactions'] = $this->model('Transaction_model')->getAllTransactionByPlaceID($id);
+
+        // echo json_encode($data['transactions']);
+        // die();
 
         $this->view('po_dashboard/templates/header', $data);
         $this->view('po_dashboard/templates/sidebar');
         $this->view('place/detail', $data);
         $this->view('po_dashboard/templates/footer');
+    }
+
+    public function contactOwnerPlace()
+    {
+        $place_name = htmlspecialchars($_POST['place_name']);
+        $contact_person = htmlspecialchars($_POST['contact_person']);
+        $contact_person = explode('0', $contact_person);
+        $contact_person = '62' . end($contact_person);
+        $name = htmlspecialchars($_POST['name']);
+        $phone_number = htmlspecialchars($_POST['phone_number']);
+        $start = htmlspecialchars($_POST['start']);
+        $end = htmlspecialchars($_POST['end']);
+
+        $text = "Excuse%20me%2C%20can%20I%20make%20a%20reservation%20for%20a%20place%3A%0A%0APlace%20name%3A%20$place_name%0AName%20%3A%20$name%0APhone%20number%3A%20$phone_number%0A%0AFor%20Hours%0AStart%3A%20$start%0AEnd%3A%20$end%0A%0A%0Afrom%3A%20%40friendfinder";
+
+        header('Location: https://api.WhatsApp.com/send?phone=' . $contact_person . '&text=' . $text);
+    }
+
+    public function visit($id)
+    {
+        $data['title'] = 'Place Owner';
+        $credential = $_SESSION['account'];
+        $data['account'] = $this->model('Account_model')->getAccountByID($credential['id']);
+        $data['place'] = $this->model('Place_model')->getPlaceByID($id);
+        $data['categories'] = $this->model('Category_model')->getAllCategory();
+        $data['transactions'] = $this->model('Transaction_model')->getAllTransactionByPlaceID($id);
+
+        // echo json_encode($data['transactions']);
+        // die();
+
+        $this->view('templates/header', $data);
+        $this->view('templates/sidebar');
+        $this->view('place/detail', $data);
+        $this->view('templates/footer');
     }
 
     public function edit($id)

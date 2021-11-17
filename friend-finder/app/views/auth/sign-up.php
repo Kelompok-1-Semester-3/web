@@ -10,9 +10,9 @@
     <link href="<?= BASE_URL ?>/css/bootstrap.min.css" rel="stylesheet">
 
     <!-- my font -->
+    <!-- my style -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <!-- my style -->
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
 
     <link rel="stylesheet" href="<?= BASE_URL ?>/css/mystyle.css">
@@ -69,11 +69,12 @@
                                     <label for="email" class="form-label my-label">Email Address</label>
                                     <input required type="email" name="email" class="form-control" id="email">
                                 </div>
-                                <div class="mb-3">
+                                <div class="mb-3" id="password_field">
                                     <label for="password" class="form-label my-label">Password</label>
                                     <input required type="password" name="password" class="form-control" id="password">
+                                    <small class="text-muted">Min 6 character</small>
                                 </div>
-                                <button class="btn w-100 btn-primary btn-sign-in btn-shadow mt-4">Sign up</button>
+                                <button class="btn w-100 btn-primary btn-sign-up btn-shadow mt-4">Sign up</button>
                             </div>
                         </form>
                     </div>

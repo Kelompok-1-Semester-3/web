@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Waktu pembuatan: 15 Nov 2021 pada 07.32
+-- Waktu pembuatan: 18 Nov 2021 pada 00.19
 -- Versi server: 10.4.18-MariaDB
 -- Versi PHP: 8.0.3
 
@@ -32,12 +32,9 @@ CREATE TABLE `booking` (
   `place_id` int(11) NOT NULL,
   `customer_name` varchar(30) NOT NULL,
   `contact_person` varchar(12) NOT NULL,
-  `start_date` date NOT NULL,
-  `end_date` date DEFAULT NULL,
-  `time_estimates` int(11) NOT NULL,
-  `price` int(7) NOT NULL,
-  `total` int(7) NOT NULL,
-  `play_time` time NOT NULL,
+  `start` time NOT NULL,
+  `end` time NOT NULL,
+  `total` int(10) NOT NULL,
   `book_date` date NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
@@ -45,9 +42,9 @@ CREATE TABLE `booking` (
 -- Dumping data untuk tabel `booking`
 --
 
-INSERT INTO `booking` (`id`, `place_id`, `customer_name`, `contact_person`, `start_date`, `end_date`, `time_estimates`, `price`, `total`, `play_time`, `book_date`) VALUES
-(6, 5, 'Jhony Cage', '081515144982', '2021-11-15', '2021-11-15', 5, 1000000, 5000000, '09:00:00', '2021-11-15'),
-(7, 6, 'Vero', '081515144983', '2021-11-15', '2021-11-15', 1, 50000, 50000, '15:00:00', '2021-11-15');
+INSERT INTO `booking` (`id`, `place_id`, `customer_name`, `contact_person`, `start`, `end`, `total`, `book_date`) VALUES
+(9, 6, 'Jhony Cage', '081515144981', '12:00:00', '13:30:00', 50000, '2021-11-17'),
+(10, 4, 'Ibnu', '081515144982', '12:00:00', '14:00:00', 180000, '2021-11-17');
 
 -- --------------------------------------------------------
 
@@ -129,8 +126,7 @@ CREATE TABLE `place` (
 
 INSERT INTO `place` (`id`, `place_name`, `place_owner`, `price`, `location`, `description`, `created_at`, `place_picture`, `place_open_time`, `place_close_time`, `status`, `category_id`, `contact_person`) VALUES
 (4, 'Old Trafford', 'MU', 90000, 'Amsterdam', 'Old Trafford adalah sebuah stadion sepak bola yang berlokasi di Old Trafford, Greater Manchester, Inggris, dan merupakan markas klub sepak bola Manchester United', '2021-11-15', '6191c74a76fb66191c74a76fb6.jpg', '12:00:00', '23:00:00', 'available', 2, '081515144981'),
-(5, 'Old Trafford', 'MU', 1000000, 'Mangli, Jember', 'Old Trafford adalah sebuah stadion sepak bola yang berlokasi di Old Trafford, Greater Manchester, Inggris, dan merupakan markas klub sepak bola Manchester United', '2021-11-15', '6191c790b28ed6191c790b28ed.jpg', '07:00:00', '23:00:00', 'not available', 2, '081515144982'),
-(6, 'BOBO Futsal', 'aab', 50000, 'Jatiroto', 't is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout. ', '2021-11-15', '6191fab9b41e16191fab9b41e1.png', '08:00:00', '22:00:00', 'not available', 2, '082231159862');
+(6, 'BOBO Futsal', 'aab', 50000, 'Jatiroto', 't is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout. ', '2021-11-15', '6191fab9b41e16191fab9b41e1.png', '08:00:00', '22:00:00', 'available', 2, '082231159862');
 
 -- --------------------------------------------------------
 
@@ -201,7 +197,7 @@ ALTER TABLE `user`
 -- AUTO_INCREMENT untuk tabel `booking`
 --
 ALTER TABLE `booking`
-  MODIFY `id` int(4) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
+  MODIFY `id` int(4) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
 
 --
 -- AUTO_INCREMENT untuk tabel `category`

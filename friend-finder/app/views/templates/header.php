@@ -40,6 +40,7 @@
     <!-- Custom styles for this template -->
     <link href="<?= BASE_URL ?>/css/dashboard.css" rel="stylesheet">
     <link href="<?= BASE_URL ?>/css/mystyleDashboard.css" rel="stylesheet" type="text/css">
+    <link href="<?= BASE_URL ?>/css/datatables.min.css" rel="stylesheet">
 </head>
 
 <body>

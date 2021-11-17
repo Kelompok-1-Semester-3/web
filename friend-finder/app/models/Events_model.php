@@ -8,6 +8,19 @@ class Events_model
         $this->db = new Database;
     }
 
+    public function getNumberOfActivity()
+    {
+        $this->db->query('SELECT count(id) as total FROM `event` ');
+        return $this->db->single();
+    }
+
+    public function getSelfEvent($id)
+    {
+        $this->db->query('SELECT COUNT(id) as total FROM event WHERE created_by=:id');
+        $this->db->bindValue('id', $id);
+        return $this->db->single();
+    }
+
     public function getAllEvents()
     {
         $events = $this->db->query('SELECT * FROM event');

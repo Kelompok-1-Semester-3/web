@@ -6,7 +6,7 @@
 
     <div class="row">
         <div class="col-md-4">
-            <div class="card badge-card">
+            <div class="card badge-card mb-4">
                 <div class="card-body">
                     <div class="row">
                         <div class="col">
@@ -26,7 +26,7 @@
             </div>
         </div>
         <div class="col-md-4">
-            <div class="card badge-card">
+            <div class="card badge-card mb-4">
                 <div class="card-body">
                     <div class="row">
                         <div class="col">
@@ -46,7 +46,7 @@
             </div>
         </div>
         <div class="col-md-4">
-            <div class="card badge-card">
+            <div class="card badge-card mb-4">
                 <div class="card-body">
                     <div class="row">
                         <div class="col">
@@ -93,7 +93,7 @@
                                                 <?= ($category['id'] == $place['category_id']) ? $category['name'] : '' ?>
                                             <?php endforeach; ?>
                                         </span>
-                                        <span class="badge d-flex align-items-center <?= ($place['status'] == 'available') ? 'bg-primary' : 'bg-danger' ?> rounded-pill"><?= $place['status'] ?></span>
+                                        <!--<span class="badge d-flex align-items-center <?= ($place['status'] == 'available') ? 'bg-primary' : 'bg-danger' ?> rounded-pill"><?= $place['status'] ?></span>-->
                                     </div>
                                 </div>
                                 <h4 class="mt-1"><strong><?= $place['place_name'] ?></strong></h4>
@@ -109,9 +109,17 @@
                                             <span data-feather="map-pin" class="me-2 color-primary"></span><?= $place['location'] ?>
                                         </div>
                                     </li>
+
                                     <li>
                                         <div class="d-flex align-items-center">
-                                            <span data-feather="clock" class="me-2 color-primary"></span><?= $place['place_open_time'] ?> - <?= $place['place_close_time'] ?>
+                                            <span data-feather="clock" class="me-2 color-primary"></span>
+                                            <?php
+                                            $open = explode(':', $place['place_open_time']);
+                                            $open = $open[0] . ':' . $open[1];
+                                            $close = explode(':', $place['place_close_time']);
+                                            $close = $close[0] . ':' . $close[1];
+                                            echo $open . '-' . $close;
+                                            ?>
                                         </div>
                                     </li>
                                 </ul>
