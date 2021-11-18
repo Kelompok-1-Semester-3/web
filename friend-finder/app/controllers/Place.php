@@ -45,16 +45,21 @@ class Place extends Controller
     {
         $place_name = htmlspecialchars($_POST['place_name']);
         $contact_person = htmlspecialchars($_POST['contact_person']);
-        $contact_person = explode('0', $contact_person);
-        $contact_person = '62' . end($contact_person);
+        $contact_person = '62' . substr($contact_person, 1);
+        // var_dump($contact_person);
+        // die();
         $name = htmlspecialchars($_POST['name']);
         $phone_number = htmlspecialchars($_POST['phone_number']);
         $start = htmlspecialchars($_POST['start']);
         $end = htmlspecialchars($_POST['end']);
 
         $text = "Excuse%20me%2C%20can%20I%20make%20a%20reservation%20for%20a%20place%3A%0A%0APlace%20name%3A%20$place_name%0AName%20%3A%20$name%0APhone%20number%3A%20$phone_number%0A%0AFor%20Hours%0AStart%3A%20$start%0AEnd%3A%20$end%0A%0A%0Afrom%3A%20%40friendfinder";
-
-        header('Location: https://api.WhatsApp.com/send?phone=' . $contact_person . '&text=' . $text);
+        echo "
+            <script>
+                window.open(`https://api.WhatsApp.com/send?phone=$contact_person&text=$text`, '_blank');
+                window.history.back();
+            </script>
+        ";
     }
 
     public function visit($id)

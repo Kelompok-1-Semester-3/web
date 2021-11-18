@@ -40,7 +40,7 @@ if ($_SESSION['account']['role_id'] != 2) {
                         </a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="<?= BASE_URL ?>/place">
+                        <a class="nav-link <?= (App::$page == 'place') ? 'active text-white' : '' ?>" href="<?= BASE_URL ?>/place">
                             <div class="d-flex align-items-center">
                                 <span data-feather="map-pin" class="me-2"></span>
                                 Place
