@@ -70,4 +70,9 @@ class Auth_model
             return 0;
         }
     }
+    public function getAllUser()
+    {
+        $this->db->query('SELECT * FROM user');
+        return $this->db->resultSet();
+    }
 }
