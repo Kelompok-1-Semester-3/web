@@ -127,8 +127,8 @@ class Events_model
     public function getEventByKeyword($data)
     {
         $keyword = $data;
-        $this->db->query('SELECT * FROM event, category WHERE name_event LIKE :name_event LIMIT 1');
-        $this->db->bindValue('name_event', "%$keyword%");
+        $this->db->query('SELECT * FROM event, category WHERE name_event LIKE :keyword OR location LIKE :keyword LIMIT 1');
+        $this->db->bindValue('keyword', "%$keyword%");
         return $this->db->resultSet();
     }
 }
