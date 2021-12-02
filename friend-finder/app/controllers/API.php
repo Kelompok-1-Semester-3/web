@@ -16,6 +16,23 @@ class API extends Controller
         die();
     }
 
+    public function getUserByEmail()
+    {
+        $data['user'] = $this->model('Auth_model')->getDataUserByEmail($_POST['email']);
+
+        $response = [];
+        if (!empty($data['user'])) {
+            $response['status'] = 1;
+            $response['pesan'] = "Data Tersedia";
+            $response['fullname'] = $data['user']['fullname'];
+        } else {
+            $response['status'] = 0;
+            $response['pesan'] = "data tidak tersedia";
+        }
+
+        echo json_encode($response);
+    }
+
     public function getAllUser()
     {
         $data["user"] =  $this->model('Auth_model')->getAllUser();
@@ -52,5 +69,21 @@ class API extends Controller
             $response['pesan'] = "Gagal Register";
         }
         echo json_encode($response);
+    }
+    public function getId()
+    {
+        $response = [];
+        if ($data['id'] = $this->model('Auth_model')->getUserByEmail($_POST['email']) > 0) {
+            // $result = $this->db->single();
+            $response['status'] = 1;
+            $response['pesan'] = "Data Tersedia";
+        } else {
+            $response['status'] = 0;
+            $response['pesan'] = "Data Tidak Tersedia";
+        }
+
+        echo json_encode($response);
+        echo json_encode($data['id']);
+        // echo json_encode($result);
     }
 }
