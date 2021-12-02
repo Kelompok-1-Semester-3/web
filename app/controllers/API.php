@@ -98,6 +98,6 @@ class API extends Controller
 
     public function hei()
     {
-        echo 'hei';
+        echo 'hei sdkjhfkjsh';
     }
 }
