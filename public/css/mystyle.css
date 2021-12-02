@@ -1,0 +1,122 @@
+:root {
+    --primaryColor: #6E5DE7;
+    --primaryDarkColor: #5345b8;
+    --warningColor: #F7CC74;
+    --dangerColor: #FB4141;
+    --backgroundColor: #FBFBFB;
+    --fontColor: #2a2a2a;
+}
+
+body {
+    background-color: var(--backgroundColor);
+    /* min-height: 900px; */
+    font-family: 'poppins', sans-serif;
+    color: var(--fontColor);
+}
+
+.color-primary {
+    color: var(--primaryColor);
+}
+
+.fw-semibold {
+    display: inline-block;
+    font-weight: 600 !important;
+}
+
+/* event */
+.my-event-title {
+    font-family: 'poppins semibold';
+    font-size: 24px;
+}
+
+/* navbar */
+.my-nav-brand {
+    font-weight: bold;
+    font-size: 18px;
+}
+
+.nav-link {
+    font-size: 16px;
+}
+
+.nav-link.active {
+    color: var(--primaryColor);
+    font-weight: 600;
+}
+
+/* button */
+
+.btn {
+    padding: 0.6rem 2.4rem;
+}
+
+.btn-shadow {
+    box-shadow: 0px 2px 4px -2px rgba(24, 39, 75, 0.12), 0px 4px 4px -2px rgba(24, 39, 75, 0.08);
+}
+
+/* button primary */
+.btn-primary {
+    color: #fff;
+    background-color: var(--primaryColor);
+    border-color: var(--primaryColor);
+}
+
+h2 {
+    font-family: 'poppins semibold';
+}
+
+/* button primary hover */
+.btn-primary:hover {
+    color: #fff;
+    background-color: var(--primaryDarkColor);
+    border-color: var(--primaryColor);
+}
+
+/* button outline primary */
+.btn-outline-primary {
+    color: var(--primaryColor);
+    border-color: var(--primaryColor);
+}
+
+/* button ouline hover */
+.btn-outline-primary:hover {
+    color: #fff;
+    background-color: var(--primaryColor);
+    border-color: var(--primaryColor);
+}
+
+.btn-sign-in {
+    height: 48px;
+    border-radius: 9;
+}
+
+/* section */
+section {
+    display: block;
+    margin-top: 100px !important;
+    margin-bottom: 50px !important;
+}
+
+.my-section-title {
+    margin-bottom: 80px;
+    margin-top: 80px;
+}
+
+img {
+    border-radius: 8px;
+}
+
+/* Form */
+.form-component {
+    margin-top: 50px;
+}
+
+.form-control {
+    border-radius: 8px;
+    height: 40px;
+}
+
+.my-label {
+    font-size: 14px;
+    font-family: 'poppins semibold';
+}
