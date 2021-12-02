@@ -86,4 +86,18 @@ class API extends Controller
         echo json_encode($data['id']);
         // echo json_encode($result);
     }
+
+    public function getAllEvent()
+    {
+        echo json_encode($this->model('Events_model')->getDataEvents());
+    }
+    public function getEventThumbnail()
+    {
+        echo json_encode($this->model('Events_model')->getThumbnailEvent());
+    }
+
+    public function hei()
+    {
+        echo 'hei sdkjhfkjsh';
+    }
 }
