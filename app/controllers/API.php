@@ -95,4 +95,9 @@ class API extends Controller
     {
         echo json_encode($this->model('Events_model')->getThumbnailEvent());
     }
+
+    public function hei()
+    {
+        echo 'hei';
+    }
 }
