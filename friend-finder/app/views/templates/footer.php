@@ -19,6 +19,7 @@
     });
 </script>
 <script src="<?= BASE_URL ?>/js/kodeku.js"></script>
+<script src="<?= BASE_URL ?>/js/validations.js"></script>
 </body>
 
 </html>

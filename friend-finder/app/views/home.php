@@ -52,9 +52,9 @@
             <div class="row my-auto align-items-center">
                 <div class="col-md-6 ">
                     <h1 class="fw-bold">Friend Finder</h1>
-                    <p class="fw-light">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Earum illo commodi dolorem velit? A sequi consequatur aspernatur nesciunt quis eum.</p>
+                    <p class="fw-light">Friend finder is a friend finder application, event maker, place finder for those of you who want to do activities together quickly and effectively</p>
 
-                    <button class="btn btn-primary mt-4 btn-shadow">Get Started</button>
+                    <a href="<?= BASE_URL ?>/auth/sign_up" class="btn btn-primary mt-4 btn-shadow">Get Started</a>
                 </div>
                 <div class="col-md-6 text-end">
                     <img src="<?= BASE_URL ?>/img/hero2.svg" width="500" class="img-fluid">

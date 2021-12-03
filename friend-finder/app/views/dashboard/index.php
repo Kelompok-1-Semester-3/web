@@ -180,7 +180,7 @@
                     </div>
                     <div class="mb-3">
                         <label for="price" class="form-label">Price</label>
-                        <input type="number" name="price" id="price" class="form-control">
+                        <input type="text" name="price" id="price" class="form-control">
                     </div>
                     <div class="mb-3">
                         <label for="location" class="form-label">Location</label>

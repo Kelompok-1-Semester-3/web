@@ -14,6 +14,18 @@ class Events_model
         return $this->db->single();
     }
 
+    public function getDataEvents()
+    {
+        $this->db->query("SELECT event.`id`, `name_event`, `event_owner`, `contact_person`, `description`, `event_picture`, `category_id`, `event_start_date`, `event_end_date`, `price`, `location`, `created_by`, category.name as 'category' FROM `event`, category WHERE category.id = event.category_id ");
+        return $this->db->resultSet();
+    }
+
+    public function getThumbnailEvent()
+    {
+        $this->db->query("SELECT event.`id`, `name_event`, `event_owner`, `contact_person`, `description`, `event_picture`, `category_id`, `event_start_date`, `event_end_date`, `price`, `location`, `created_by`, category.name as 'category' FROM `event`, category WHERE category.id = event.category_id LIMIT 3 ");
+        return $this->db->resultSet();
+    }
+
     public function getSelfEvent($id)
     {
         $this->db->query('SELECT COUNT(id) as total FROM event WHERE created_by=:id');
@@ -23,7 +35,7 @@ class Events_model
 
     public function getAllEvents()
     {
-        $events = $this->db->query('SELECT * FROM event');
+        $this->db->query('SELECT * FROM event');
         return $this->db->resultSet();
     }
 
@@ -127,8 +139,8 @@ class Events_model
     public function getEventByKeyword($data)
     {
         $keyword = $data;
-        $this->db->query('SELECT * FROM event, category WHERE name_event LIKE :name_event LIMIT 1');
-        $this->db->bindValue('name_event', "%$keyword%");
+        $this->db->query('SELECT * FROM event, category WHERE name_event LIKE :keyword OR location LIKE :keyword LIMIT 1');
+        $this->db->bindValue('keyword', "%$keyword%");
         return $this->db->resultSet();
     }
 }

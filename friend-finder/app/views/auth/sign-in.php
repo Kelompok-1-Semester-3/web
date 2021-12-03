@@ -72,13 +72,13 @@
                 </div>
             </div>
         </div>
-        <footer class="mt-auto container d-flex justify-content-between">
+        <!--footer class="mt-auto container d-flex justify-content-between">
             <h6 class="fw-semibold">Made by Kelompok 1</h6>
             <div class="d-flex">
                 <h6 class="fw-semibold me-4 color-primary">instagram: @friendfinder</h6>
                 <h6 class="fw-semibold color-primary">Tugas akhir workshop</h6>
             </div>
-        </footer>
+        </!--footer-->
     </div>
 
 

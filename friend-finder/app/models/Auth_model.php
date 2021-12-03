@@ -29,6 +29,13 @@ class Auth_model
         return $this->db->rowCount();
     }
 
+    public function getDataUserByEmail($data)
+    {
+        $this->db->query('SELECT * FROM user WHERE email =:data');
+        $this->db->bindValue('data', $data);
+        return $this->db->single();
+    }
+
     // get user by email (check)
     public function getUserByEmail($data)
     {
@@ -37,8 +44,8 @@ class Auth_model
         $this->db->query('SELECT * FROM user WHERE email=:email');
         $this->db->bindValue('email', $email);
         $this->db->execute();
-
-        return $this->db->rowCount();
+        $result = $this->db->rowCount();
+        return $result;
     }
 
     // login
@@ -69,5 +76,10 @@ class Auth_model
         } else {
             return 0;
         }
+    }
+    public function getAllUser()
+    {
+        $this->db->query('SELECT * FROM user');
+        return $this->db->resultSet();
     }
 }

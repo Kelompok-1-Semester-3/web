@@ -59,12 +59,15 @@
                                         <span data-feather="corner-down-left" class="color-white"></span>
                                     </div>
                                 </button>
-                                <button class="btn btn-primary btn-shadow">
+                                <a target="_blank" class="btn btn-primary btn-shadow" href="https://api.whatsapp.com/send?phone=<?php
+                                                                                                                                $contact_person = $data['event']['contact_person'];
+                                                                                                                                $contact_person = '62' . substr($contact_person, 1);
+                                                                                                                                echo $contact_person; ?>&text=Hei%20there%21%2C%20can%20i%20get%20in%20to%20your%20event%3F">
                                     <div class="d-flex align-items-center">
                                         <span class="d-block my-auto me-2 fw-medium">CONTACT OWNER</span>
                                         <span data-feather="phone" class="color-white"></span>
                                     </div>
-                                </button>
+                                </a>
                             </div>
                         </div>
                     </div>
@@ -73,3 +76,23 @@
         </div>
     </div>
 </main>
+
+
+<!-- Modal C -->
+<!-- <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                ...
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-primary">Save changes</button>
+            </div>
+        </div>
+    </div>
+</div> -->

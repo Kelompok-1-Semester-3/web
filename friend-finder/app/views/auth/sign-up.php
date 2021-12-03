@@ -48,7 +48,7 @@
 
         <div class="container align-items-center my-auto">
 
-            <div class="row align-self my-auto-center justify-content-center">
+            <div class="row align-self my-auto-center justify-content-center mb-5">
                 <div class="col-lg-4">
                     <?= Flasher::flash(); ?>
                     <div class="row">
@@ -72,28 +72,42 @@
                                 <div class="mb-3" id="password_field">
                                     <label for="password" class="form-label my-label">Password</label>
                                     <input required type="password" name="password" class="form-control" id="password">
-                                    <small class="text-muted">Min 6 character</small>
+                                    <small class="text-danger" id="error_password">Min 6 character</small>
                                 </div>
-                                <button class="btn w-100 btn-primary btn-sign-up btn-shadow mt-4">Sign up</button>
+                                <button class="btn disabled w-100 btn-primary btn-sign-up btn-shadow mt-4">Sign up</button>
                             </div>
                         </form>
                     </div>
                 </div>
             </div>
         </div>
-        <footer class="container mt-5 d-flex justify-content-between">
+        <!--footer class="container mt-5 d-flex justify-content-between">
             <h6 class="fw-semibold">Made by Kelompok 1</h6>
             <div class="d-flex">
                 <p class="fw-normal me-4 text-muted">instagram: @friendfinder</p>
                 <p class="fw-normal text-muted">Tugas akhir workshop</p>
             </div>
-        </footer>
+        </!--footer-->
     </div>
 
 
 
     <script src="<?= BASE_URL ?>/js/bootstrap.bundle.min.js"></script>
     <script src="<?= BASE_URL ?>/js/jquery.js"></script>
+    <script>
+        $(document).ready(function() {
+            $('input#password').keyup(function(e) {
+                let val = $(this).val();
+                if (val.length < 6) {
+                    $('#error_password').removeClass('d-none');
+                    $('.btn-sign-up').addClass('disabled');
+                } else {
+                    $('#error_password').addClass('d-none');
+                    $('.btn-sign-up').removeClass('disabled');
+                }
+            });
+        });
+    </script>
 
 </body>
 
