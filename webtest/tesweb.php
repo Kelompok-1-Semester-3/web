@@ -10,7 +10,7 @@ class tesweb extends TestCase
         $insert = new Login();
 
         $username="horizon";
-        $password="haji123";
+        $password="haji1234";
         $hasil= $insert->login($username,$password);
 
         $this->assertEquals($hasil,'berhasil');
