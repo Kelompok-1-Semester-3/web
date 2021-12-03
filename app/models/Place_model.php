@@ -41,6 +41,12 @@ class Place_model
         return $this->db->rowCount();
     }
 
+    public function getDataPlace()
+    {
+        $this->db->query("SELECT place.`id`, `place_name`, `place_owner`, `price`, `location`, `description`, `created_at`, `place_picture`, `place_open_time`, `place_close_time`, `status`, `category_id`, `contact_person`, category.name as 'category' FROM `place`, category WHERE place.category_id = category.id");
+        return $this->db->resultSet();
+    }
+
     public function getAllPlace()
     {
         $this->db->query('SELECT * FROM place');

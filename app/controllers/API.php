@@ -4,7 +4,7 @@ class API extends Controller
 {
     public function getDataPlace()
     {
-        $data['place'] = $this->model('Place_model')->getAllPlace();
+        $data['place'] = $this->model('Place_model')->getDataPlace();
         echo json_encode($data['place']);
         die();
     }
