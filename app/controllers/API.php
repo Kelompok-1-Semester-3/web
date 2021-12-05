@@ -43,8 +43,8 @@ class API extends Controller
     public function login()
     {
         $response = [];
-        $result = $this->model('Auth_model')->login($_POST);
-        if (!empty($result)) {
+        $result = $this->model('Auth_model')->loginMobile($_POST);
+        if ($result > 0) {
             $response['status'] = 1;
             $response['pesan'] = "Berhasil Login";
         } else {
@@ -96,8 +96,8 @@ class API extends Controller
         echo json_encode($this->model('Events_model')->getThumbnailEvent());
     }
 
-    public function hei()
+    public function getDetailEvent()
     {
-        echo 'hei sdkjhfkjsh';
+        echo json_encode($this->model('API_model')->getEventByID($_POST['id']));
     }
 }

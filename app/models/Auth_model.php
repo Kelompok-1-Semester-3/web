@@ -82,4 +82,23 @@ class Auth_model
         $this->db->query('SELECT * FROM user');
         return $this->db->resultSet();
     }
+
+    public function loginMobile($data)
+    {
+        $email = htmlspecialchars($data['email']);
+        $password = htmlspecialchars($data['password']);
+        $this->db->query('SELECT * FROM user WHERE email=:email');
+        $this->db->bindValue('email', $email);
+        $result = $this->db->single();
+        if (!empty($result)) {
+            if (password_verify($password, $result['password'])) {
+                // check role_id 1: place owner 2: user
+                return 1;
+            } else {
+                return 0;
+            }
+        } else {
+            return 0;
+        }
+    }
 }
