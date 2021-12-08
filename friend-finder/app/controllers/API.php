@@ -25,6 +25,8 @@ class API extends Controller
             $response['status'] = 1;
             $response['pesan'] = "Data Tersedia";
             $response['fullname'] = $data['user']['fullname'];
+            $response['profile'] = $data['user']['profile'];
+            $response['id'] = $data['user']['id'];
         } else {
             $response['status'] = 0;
             $response['pesan'] = "data tidak tersedia";
@@ -96,8 +98,26 @@ class API extends Controller
         echo json_encode($this->model('Events_model')->getThumbnailEvent());
     }
 
-    public function getDetailEvent()
+    /*public function getDetailEvent()
     {
-        echo json_encode($this->model('API_model')->getEventByID($_POST['id']));
+        $data['event'] = $this->model('API_model')->getEventByID($_POST['id']);
+        $response = [];
+        if (!empty($data['event'])) {
+            $response['status'] = 1;
+            $response['pesan'] = "Data Tersedia";
+            $response['detailEvent'] = $data['event'];
+        } else {
+            $response['status'] = 0;
+            $response['pesan'] = "data tidak tersedia";
+        }
+
+        echo json_encode($response);
+    }
+    */
+
+    public function getAllUserEvent($id)
+    {
+        echo json_encode($this->model('API_model')->getAllUserEvent($id));
+
     }
 }
