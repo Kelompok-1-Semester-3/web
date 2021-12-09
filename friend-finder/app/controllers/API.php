@@ -120,4 +120,9 @@ class API extends Controller
         echo json_encode($this->model('API_model')->getAllUserEvent($id));
 
     }
+
+    public function getEventByKeyword($keyword)
+    {
+        echo json_encode($this->model('API_model')->getEventByKeyword($keyword));
+    }
 }

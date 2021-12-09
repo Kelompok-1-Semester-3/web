@@ -22,4 +22,11 @@ class API_model
         $this->db->bindValue('data', $data);
         return $this->db->resultSet();
     }
+
+    public function getEventByKeyword($data)
+    {
+        $this->db->query("SELECT event.`id`, `name_event`, `event_owner`, `contact_person`, `description`, `event_picture`, `category_id`, `event_start_date`, `event_end_date`, `price`, `location`, `user`.`fullname` as 'created_by' FROM `event`, user WHERE user.id = event.created_by AND name_event LIKE :keyword OR location LIKE :keyword");
+        $this->db->bindValue('keyword', "%$data%");
+        return $this->db->resultSet();
+    }
 }
