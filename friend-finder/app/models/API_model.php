@@ -25,7 +25,7 @@ class API_model
 
     public function getEventByKeyword($data)
     {
-        $this->db->query("SELECT event.`id`, `name_event`, `event_owner`, `contact_person`, `description`, `event_picture`, `category_id`, `event_start_date`, `event_end_date`, `price`, `location`, `user`.`fullname` as 'created_by' FROM `event`, user WHERE user.id = event.created_by AND name_event LIKE :keyword OR location LIKE :keyword");
+        $this->db->query("SELECT event.`id`, `name_event`, `event_owner`, `contact_person`, `description`, `event_picture`, `category_id`, `event_start_date`, `event_end_date`, `price`, `location`, `user`.`fullname` as 'created_by' FROM `event`, user, category WHERE user.id = event.created_by AND event.category_id=category.id AND name_event LIKE :keyword OR location LIKE :keyword");
         $this->db->bindValue('keyword', "%$data%");
         return $this->db->resultSet();
     }
