@@ -204,4 +204,17 @@ class API extends Controller
         $_POST['profile'] = $filename;
         $this->model('Account_model')->update($_POST);
     }
+    public function UserEventDestroy()
+    {
+        $response = [];
+      $data['event'] = ($this->model('Events_model')->destroy($_POST['id'])); 
+      if (!empty($data['event'])) {
+          $response['status'] =  1;
+          $response['pesan'] = "Data Berhasil dihapus";
+      }else{
+        $response['status'] =  0;
+          $response['pesan'] = "Data Gagal dihapus";  
+      }
+      echo json_encode ($response);
+    }
 }
