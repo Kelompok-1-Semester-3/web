@@ -101,4 +101,12 @@ class API_model
         $this->db->execute();
         return $this->db->rowCount();
     }
+
+    public function getDetailAccount($id)
+    {
+        $this->db->query('SELECT * FROM user WHERE id=:id');
+        $this->db->bindValue('id', $id);
+        $this->db->execute();
+        return $this->db->single();
+    }
 }

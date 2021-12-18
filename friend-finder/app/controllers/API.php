@@ -136,6 +136,11 @@ class API extends Controller
         echo json_encode($this->model('API_model')->getAllCategories());
     }
 
+    public function getDetailAccount($id)
+    {
+        echo json_encode($this->model('API_model')->getDetailAccount($id));
+    }
+
     public function addNewEvent()
     {
         $target = "../public/img";
@@ -176,5 +181,27 @@ class API extends Controller
         }
         $_POST['event_picture'] = $filename;
         $this->model('Events_model')->update($_POST);
+    }
+
+    public function updateAccount()
+    {
+        $target = "../public/img";
+        $filename =  uniqid() . '.jpeg';
+        $target = $target . '/' . $filename;
+        $image = $_POST['profile'];
+        if (file_put_contents($target, base64_decode($image))) {
+            echo json_encode([
+                'message' => "The file has been uploaded",
+                'status' => "Ok"
+            ]);
+        } else {
+            echo json_encode([
+                'message' => "Sorry, upload image failed!",
+                'status' => "Error"
+            ]);
+        }
+
+        $_POST['profile'] = $filename;
+        $this->model('Account_model')->update($_POST);
     }
 }
