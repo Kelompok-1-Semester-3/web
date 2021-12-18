@@ -129,7 +129,7 @@ class Event extends Controller
                 </script>
             ';
         } else {
-            Flasher::setFlash('Faileds', 'Update Event Failed', 'danger');
+            Flasher::setFlash('Failed', 'Update Event Failed', 'danger');
             echo '
                 <script>
                     window.history.back();

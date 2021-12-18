@@ -2,6 +2,12 @@
 
 class API extends Controller
 {
+
+    public function getDetailEvent($id)
+    {
+        echo json_encode($this->model('API_model')->getEventByID($id));
+    }
+
     public function getDataPlace()
     {
         $data['place'] = $this->model('Place_model')->getDataPlace();
@@ -118,11 +124,57 @@ class API extends Controller
     public function getAllUserEvent($id)
     {
         echo json_encode($this->model('API_model')->getAllUserEvent($id));
-
     }
 
     public function getEventByKeyword($keyword)
     {
         echo json_encode($this->model('API_model')->getEventByKeyword($keyword));
+    }
+
+    public function getAllCategories()
+    {
+        echo json_encode($this->model('API_model')->getAllCategories());
+    }
+
+    public function addNewEvent()
+    {
+        $target = "../public/img";
+        $filename =  uniqid() . '.jpeg';
+        $target = $target . '/' . $filename;
+        $image = $_POST['event_picture'];
+        if (file_put_contents($target, base64_decode($image))) {
+            echo json_encode([
+                'message' => "The file has been uploaded",
+                'status' => "Ok"
+            ]);
+        } else {
+            echo json_encode([
+                'message' => "Sorry, upload image failed!",
+                'status' => "Error"
+            ]);
+        }
+        $_POST['event_picture'] = $filename;
+        $this->model('Events_model')->store($_POST);
+    }
+    
+    public function editEvent()
+    {
+        $target = "../public/img";
+        $filename =  uniqid() . '.jpeg';
+        $target = $target . '/' . $filename;
+        $image = $_POST['event_picture'];
+        if (file_put_contents($target, base64_decode($image))) {
+            echo json_encode([
+                'message' => "The file has been uploaded",
+                'status' => "Ok"
+            ]);
+        } else {
+            echo json_encode([
+                'message' => "Sorry, upload image failed!",
+                'status' => "Error"
+            ]);
+        }
+        $_POST['event_picture'] = $filename;
+        $this->model('Events_model')->update($_POST);
     }
 }
