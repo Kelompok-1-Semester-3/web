@@ -101,4 +101,17 @@ class Auth_model
             return 0;
         }
     }
-}
+
+    public function updateProfil($data){
+        $id = htmlspecialchars($data['id']);
+        $fullname = htmlspecialchars($data['fullname']);
+        $email = htmlspecialchars($data['email']);
+
+        $this->db->query("UPDATE `user` SET `fullname` = '$fullname', `email` = '$email' WHERE `user`.`id` = :id;");
+        $this->db->bindValue('id', $id);
+        // $this->db->bindValue('fullname', $fullname);        
+        // $this->db->bindValue('email', $email);
+        $this->db->execute();
+        return $this->db->rowCount();
+    }
+}   

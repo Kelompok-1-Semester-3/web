@@ -125,4 +125,17 @@ class API extends Controller
     {
         echo json_encode($this->model('API_model')->getEventByKeyword($keyword));
     }
+
+    public function updateProfil()
+    {
+        $response = [];
+        if ($this->model('Auth_model')->updateProfil($_POST) > 0) {
+            $response['status'] = 2;
+            $response['pesan'] = "Berhasil Update";
+        } else {
+            $response['status'] = 0;
+            $response['pesan'] = "Gagal Update";
+        }
+        echo json_encode($response);
+    }
 }
